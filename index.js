@@ -5,7 +5,7 @@ const app = express()
 const PORT = 4000
 
 
-app.get('/', (req, res) => {
+app.get('/dude.json', (req, res) => {
  
   let config = {
     method: 'get',
@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
     // Set response content    
     res.write(JSON.stringify(response.data));
   //  res.status(200).json('Welcome, your app is working well');
-    res.end();//end the response
+    res.send();//end the response
   })
   .catch((error) => {
     console.log(error);

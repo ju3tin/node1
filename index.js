@@ -8,6 +8,7 @@ const PORT = 4000
 app.get('/', (req, res) => {
 
      res.write('Hello World');
+     res.send();
  
 })
 

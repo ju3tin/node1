@@ -5,6 +5,12 @@ const app = express()
 const PORT = 4000
 
 
+app.get('/', (req, res) => {
+
+     res.write('Hello World');
+ 
+})
+
 app.get('/dude.json', (req, res) => {
  
   let config = {

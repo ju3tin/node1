@@ -63,6 +63,27 @@ app.get('/dude.json', (req, res) => {
 })
 
 
+app.post("/", upload.single('productImage'), (req, res, next) => {
+  const product = new Product({
+    productImage: req.file.path 
+  });
+  product
+    .save()
+    .then(result => {
+      console.log(result);
+      res.status(201).json({
+        message: "Created product successfully",
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
+});
+
+
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });

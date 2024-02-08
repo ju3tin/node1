@@ -1,55 +1,8 @@
 // index.js
-const express = require('express');
+const express = require('express')
 const axios = require('axios');
-const app = express();
-
-//
-
-const fileUpload = require('express-fileupload');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const _ = require('lodash');
-
-
-// enable files upload
-app.use(fileUpload({
-    createParentPath: true
-}));
-
-//add other middleware
-app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(morgan('dev'));
-
-//
-
-
-const PORT = 4000;
-
-const mongoose = require("mongoose");
-const multer = require('multer');
-
-const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, './uploads/');
-  },
-  filename: function(req, file, cb) {
-    cb(null, new Date().toISOString() + file.originalname);
-  }
-});
-
-const fileFilter = (req, file, cb) => {
-};
-
-const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 1024 * 1024 * 5
-  },
-  fileFilter: fileFilter
-});
+const app = express()
+const PORT = 4000
 
 
 app.get('/', (req, res) => {
@@ -84,43 +37,6 @@ app.get('/dude.json', (req, res) => {
   });
 
 })
-
-app.post('/upload-avatar', async (req, res) => {
-    try {
-        if(!req.files) {
-            res.send({
-                status: false,
-                message: 'No file uploaded'
-            });
-        } else {
-            //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
-            let avatar = req.files.avatar;
-            
-            //Use the mv() method to place the file in the upload directory (i.e. "uploads")
-            avatar.mv('./upload/' + avatar.name);
-
-            //send response
-            res.send({
-                status: true,
-                message: 'File is uploaded',
-                data: {
-                    name: avatar.name,
-                    mimetype: avatar.mimetype,
-                    size: avatar.size
-                }
-            });
-        }
-    } catch (err) {
-        res.status(500).send(err);
-    }
-});
-
-app.post("/upload", upload.single('productImage'), (req, res, next) => {
-  
-    productImage: req.file.path 
-  
-
-});
 
 
 app.listen(PORT, () => {

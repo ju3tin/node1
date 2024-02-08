@@ -1,9 +1,21 @@
 // index.js
-const express = require('express')
+const express = require('express');
 const axios = require('axios');
-const app = express()
-const PORT = 4000
+const app = express();
 
+const PORT = 4000;
+
+const mongoose = require("mongoose");
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, './uploads/');
+  },
+  filename: function(req, file, cb) {
+    cb(null, new Date().toISOString() + file.originalname);
+  }
+});
 
 app.get('/', (req, res) => {
 

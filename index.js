@@ -4,19 +4,6 @@ const axios = require('axios');
 const app = express()
 const PORT = 4000
 
-app.post('/upload', , (req, res) => {
-
-     res.write('Hello World');
-     res.send();
- 
-});
-
-app.get('/', (req, res) => {
-
-     res.write('Hello World');
-     res.send();
- 
-})
 
 app.get('/dude.json', (req, res) => {
  

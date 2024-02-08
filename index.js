@@ -63,7 +63,7 @@ app.get('/dude.json', (req, res) => {
 })
 
 
-app.post("/", upload.single('productImage'), (req, res, next) => {
+app.post("/upload", upload.single('productImage'), (req, res, next) => {
   const product = new Product({
     productImage: req.file.path 
   });
